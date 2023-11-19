@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;warmisitAI/src/main/resources/templates/lista-incidencias.html&apos; to &apos;lista-incidencias-evaluadas.html&apos;" description="Rename resource &apos;lista-incidencias.html&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/main/resources/templates/lista-incidencias.html" name="lista-incidencias-evaluadas.html" stamp="1700370166319" updateReferences="true"/>
+</session>

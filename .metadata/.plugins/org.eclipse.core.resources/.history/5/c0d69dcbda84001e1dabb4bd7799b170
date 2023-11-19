@@ -1,0 +1,33 @@
+package com.proyecto.warmisitAI.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.proyecto.warmisitAI.models.Tecnico;
+import com.proyecto.warmisitAI.repository.TecnicoRepository;
+
+public class TecnicoService {
+	 private final TecnicoRepository tecnicoRepository;
+
+	    @Autowired
+	    public TecnicoService(TecnicoRepository tecnicoRepository) {
+	        this.tecnicoRepository = tecnicoRepository;
+	    }
+
+	    public List<Tecnico> obtenerTodosLosTecnicos() {
+	        return tecnicoRepository.findAll();
+	    }
+
+	    public Tecnico obtenerTecnicoPorId(int id) {
+	        return tecnicoRepository.findById(id).orElse(null);
+	    }
+
+	    public void guardarTecnico(Tecnico tecnico) {
+	        tecnicoRepository.save(tecnico);
+	    }
+
+	    public void eliminarTecnico(int id) {
+	        tecnicoRepository.deleteById(id);
+	    }
+}

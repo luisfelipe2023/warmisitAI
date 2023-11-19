@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="./style/reportarIncidencia.css">
+      <title>Reportar Incidencia</title>
+</head>
+<body>
+      <div class="admin-dashboard">
+
+            <div class="ds-left-menu">
+    
+                <button class="btn-menu">
+                    <ion-icon name="chevron-back-circle"></ion-icon>
+                </button>
+    
+                <div class="ds-perfil">
+                    <div class="foto">
+                        <ion-icon name="person-circle"></ion-icon>
+                    </div>
+                    <div class="info-perfil">
+                        <h3>User</h3>
+                    </div>
+                </div>
+    
+                <div class="line"></div>
+
+                <div class="ds-menu">                    
+                    <ul div="menu-list">
+                        <li class="active">
+                            <a href="#">
+                                <div class="icon">
+                                    <ion-icon name="home"></ion-icon>
+                                </div>
+                                <div class="text">
+                                    <span>Home</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <div class="icon">
+                                    <ion-icon name="construct-outline"></ion-icon>
+                                </div>
+                                <div class="text">
+                                    <span>Productos</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <div class="icon">
+                                    <ion-icon name="cafe-outline"></ion-icon>
+                                </div>                           
+                                <div class="text">
+                                    <span>Ofertas</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <div class="icon">
+                                    <ion-icon name="cart-outline"></ion-icon>
+                                </div>
+                                <div class="text">
+                                    <span>Ordenes</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <div class="icon">
+                                    <ion-icon name="newspaper-outline"></ion-icon>
+                                </div>
+                                <div class="text">
+                                    <span>Reportes</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <div class="icon">
+                                    <ion-icon name="settings-outline"></ion-icon>
+                                </div>
+                                <div class="text">
+                                    <span>Ajustes</span>
+                                </div>
+                            </a>
+                        </li>    
+                    </ul> 
+                </div>
+    
+                <div class="line-two"></div>
+
+                <div class="sign-off">
+                    <a href="#" class="btn-sign-off">
+                        <div class="icon">
+                            <ion-icon name="log-out-outline"></ion-icon>
+                        </div>
+                        <div class="text">
+                            <span>Logout</span>
+                        </div>
+                    </a>
+                </div>
+                 
+            </div>
+
+            <div class="ds-panel">
+           
+                <div class="panel-header">
+                    <div class="icono">
+                        <ion-icon name="bug-outline"></ion-icon>
+                    </div>
+                    <h2>Reportar Incidencia</h2>
+                </div>
+    
+                <div class="ds-panel-content"> 
+                  <form action="index.html" method="post" class="logbook-form">
+                        <div class="input-wrap">
+                            <input type="date" autocomplete="off" name="fecha" class="logbook-input" required>
+                            <label>Fecha</label>
+                            <ion-icon class="icon" name="calendar-outline"></ion-icon>
+                        </div>
+
+                        <div class="input-wrap">
+                            <input type="time" autocomplete="off" name="fecha" class="logbook-input" required>
+                            <label>Hora</label>
+                            <ion-icon class="icon" name="time-outline"></ion-icon>
+                        </div>
+                        
+						<div class="input-wrap">
+							<input type="text" autocomplete="off" name="nombre" class="logbook-input" required>
+							<label>Nombre</label>
+							<ion-icon class="icon" name="time-outline"></ion-icon>
+						</div>
+
+                        <div class="input-wrap textarea w-100">
+                            <textarea name="Message" autocomplete="off" class="logbook-input" required></textarea>
+                            <label class="text">Descripción</label>
+                            <ion-icon class="icon" name="chatbubble-ellipses-outline"></ion-icon>
+                        </div>
+
+                        <div class="logbook-buttons w-100">
+                            <button class="btn-registrar registrar">
+                                Reportar
+                            </button>
+                        </div>
+                  </form>       
+                </div>
+    
+            </div>
+    
+        </div>
+    
+</body>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<script>
+    let btnmenu = document.querySelector('.btn-menu');
+    let dsleftmenu = document.querySelector('.ds-left-menu');
+    let line = document.querySelector('.line');
+    let linetwo = document.querySelector('.line-two');
+    let infoperfil = document.querySelector('.info-perfil');
+
+    btnmenu.onclick = function(){
+        btnmenu.classList.toggle('rotate');
+        dsleftmenu.classList.toggle('active');
+        line.classList.toggle('short');
+        linetwo.classList.toggle('short');
+        infoperfil.classList.toggle('hidden');
+    }
+
+    let menulist = document.querySelectorAll('.ds-menu ul li');
+    function activeLink(){
+        menulist.forEach((item)=>
+        item.classList.remove('active'));
+        this.classList.add('active')
+    }
+    menulist.forEach((item)=>
+    item.addEventListener('click', activeLink));
+
+
+    const inputs = document.querySelectorAll(".logbook-input");
+
+    inputs.forEach(ipt =>{
+        ipt.addEventListener("focus", () =>{
+            ipt.parentNode.classList.add("focus");
+            ipt.parentNode.classList.add("not-empty");
+        });
+        ipt.addEventListener("blur", () =>{
+            if(ipt.value == ""){
+                ipt.parentNode.classList.remove("not-empty");
+            }
+            ipt.parentNode.classList.remove("focus");
+        });
+    });
+</script>
+</html>
