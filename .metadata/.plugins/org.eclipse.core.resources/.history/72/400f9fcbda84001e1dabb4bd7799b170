@@ -1,9 +1,0 @@
-package com.proyecto.warmisitAI.repository;
-
-import org.springframework.data.jpa.repository.JpaRepository;
-
-import com.proyecto.warmisitAI.models.Tecnico;
-
-public interface TecnicoRepository extends JpaRepository<Tecnico, Integer> {
-
-}

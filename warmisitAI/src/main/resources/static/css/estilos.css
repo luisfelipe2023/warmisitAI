@@ -1,9 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap');
 
 *{
-      margin: 0;
+      margin: 0 ;
       padding: 0;
-      box-sizing: border-box;
+      box-sizing: border-box ;
       font-family: 'Poppins', sans-serif;
 }
 
@@ -83,15 +83,18 @@ a{
 }
   
 .ds-menu{
-      width: 100%;
-      overflow-x: scroll;
-      height: 100%;
-      padding-bottom: 150px;
-      padding-top: 50px;
+      width: 100% !important;
+      overflow-x: scroll !important;
+      height: 100% !important;
+      padding-bottom: 150px !important;
+      padding-top: 50px !important;
 }
   
+  
 .ds-menu ul li{
-      position: relative;
+      position: relative !important;
+      left: -30px !important;
+      width: 100% !important;
 }
 
 .ds-menu ul li.active{
@@ -100,30 +103,6 @@ a{
       border-bottom-left-radius: 50px;
 }
 
-.ds-menu ul li.active::before{
-      content: '';
-      position: absolute;
-      top: -20px;
-      right: 0;
-      width: 20px;
-      height: 20px;
-      border-bottom-right-radius: 20px;
-      box-shadow: 5px 5px 0px 5px var(--bg);
-      background-color: transparent;
-}
-
-.ds-menu ul li.active::after{
-      content: '';
-      position: absolute;
-      bottom: -20px;
-      right: 0;
-      width: 20px;
-      height: 20px;
-      border-top-right-radius: 20px;
-      box-shadow: 5px -2px 0px 2px var(--bg);
-      background-color: transparent;
-      
-}
   
 .ds-menu ul li a{
       cursor: pointer;
@@ -221,6 +200,7 @@ a{
 }
   
 .ds-perfil .info-perfil{
+	padding-top: 10px;
       transition: 0.5s;
       display: none;
 }
@@ -257,6 +237,7 @@ a{
       background: transparent;
       display: flex;
       white-space: nowrap;
+      text-decoration: none;
       color: var(--white);
       margin-top: 100px;
   }
@@ -357,7 +338,8 @@ a{
 }
 
 .ds-panel .panel-header h2{
-    font-size: 1.7em;
+	padding-top: 10px;
+	font-size: 1.7em;
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 0.05em;
@@ -369,7 +351,7 @@ a{
       float: left;
       display: flex;
       gap: 1.5rem;
-      justify-content:space-between;
+      justify-content: center;
 }
 
 .box{
@@ -383,7 +365,6 @@ a{
 }
 
 .box p{
-      font-size: 35px;
       color: var(--white);
       font-weight: bold;
       line-height: 30px;
@@ -392,8 +373,13 @@ a{
       display: inline-block;
 }
 
+.box p [style="color: white;"]{
+	 font-size: 37px;
+	 padding-top: 10px;
+	 padding-bottom: 10px;
+}
 .box p span{
-      font-size: 25px;
+      font-size: 27px;
       font-weight: 800;
       text-transform: uppercase;
       color:var(--green);
@@ -423,7 +409,7 @@ a{
       background: var(--container);
       width: 100%;
       border-radius: 2rem;
-      padding: 1rem;
+      padding: 1.5rem;
       text-align: center;
       transition: all 300ms ease;
 }
