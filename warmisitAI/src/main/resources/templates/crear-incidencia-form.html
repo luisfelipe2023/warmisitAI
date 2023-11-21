@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Reportar Incidencia</title>
+      <style>
+		  @import url('https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap');
+
+*{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+}
+
+:root{
+      --green: #6db23e;
+      --bg: #1b1e22;
+      --container: #262a2d;
+      --white: #fffefe;
+}
+
+::selection {
+      background-color: transparent; 
+}
+
+body{
+      background-color: var(--bg);
+      overflow: hidden;
+}
+
+ul{
+      list-style: none;
+}
+
+a{
+      text-decoration: none;
+}
+
+.admin-dashboard{
+      position: relative;
+      display: flex;
+}
+
+.ds-left-menu{
+      background: var(--container);
+      height: 100vh;
+      color: #fff;
+      width: 85px;
+      position: relative;
+      padding-left: 13px;  
+      transition: 0.5s;
+}
+
+.ds-left-menu.active{
+      width: 300px;
+      padding: 0px 0px 0px 20px;
+}
+  
+.btn-menu{
+      position: absolute;
+      background: var(--green);
+      color: #fff;
+      width: 35px;
+      height: 35px;
+      line-height: 35px;
+      text-align: center;
+      cursor: pointer;
+      border-radius: 50%;
+      border: none;
+      top: 110px;
+      right: -16px;
+      font-size: 16px;
+      z-index: 100;
+      transition: 0.8s;
+}
+
+.btn-menu.rotate{
+      transform: rotate(180deg);
+      transition: 0.8s;
+}
+
+.btn-menu ion-icon{
+      width: 70%;
+      height: 70%;
+      position: relative;
+      border-radius: 50%;
+      top: 5px;
+}
+  
+.ds-menu{
+      width: 100%;
+      overflow-x: scroll;
+      height: 100%;
+      padding-bottom: 150px;
+      padding-top: 50px;
+}
+  
+.ds-menu ul li{
+      position: relative;
+}
+
+.ds-menu ul li.active{
+      background-color: var(--bg);
+      border-top-left-radius: 50px;
+      border-bottom-left-radius: 50px;
+}
+
+.ds-menu ul li.active::before{
+      content: '';
+      position: absolute;
+      top: -20px;
+      right: 0;
+      width: 20px;
+      height: 20px;
+      border-bottom-right-radius: 20px;
+      box-shadow: 5px 5px 0px 5px var(--bg);
+      background-color: transparent;
+}
+
+.ds-menu ul li.active::after{
+      content: '';
+      position: absolute;
+      bottom: -20px;
+      right: 0;
+      width: 20px;
+      height: 20px;
+      border-top-right-radius: 20px;
+      box-shadow: 5px -2px 0px 2px var(--bg);
+      background-color: transparent;
+      
+}
+  
+.ds-menu ul li a{
+      cursor: pointer;
+      background: transparent;
+      display: flex;
+      white-space: nowrap;
+      text-decoration: none;
+}
+  
+.ds-menu ul li a .icon {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-width: 60px;
+      padding-left: 1px;
+      height: 65px;
+      font-size: 1.5em;
+      color: var(--white);
+      transition: 0.5s;
+}
+
+.ds-menu ul li a .text{
+      position: relative;
+      height: 65px;
+      display: flex;
+      align-items: center;
+      font-size: 1em;
+      color: var(--white);
+      padding-left: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      transition: 0.5s;
+}
+
+.ds-menu ul li.active a .icon {
+      color: var(--white);
+}
+
+.ds-menu ul li.active a .text{
+      color: var(--green);
+}
+  
+.ds-menu ul li:hover a .icon,
+.ds-menu ul li:hover a .text{
+      color: #6db23e;
+}
+
+.ds-menu ul li.active a .icon::before{
+      content: '';
+      position: absolute;
+      inset: 5px;
+      width: 55px;
+      background-color: var(--green);
+      border-radius: 50%;
+      transition: 0.5s;
+}
+
+.ds-menu ul li:hover.active a .icon::before{
+      background-color: var(--white);
+}
+
+.ds-perfil{
+      transition: 0.5s;
+      display: flex;
+      align-items: center;
+      padding: 20px 2px 40px 5px;
+}
+  
+.ds-perfil .foto{
+      position: relative;
+      width: 50px;
+      height: 50px;
+      transition: 0.5s;
+      border-radius: 50%;
+      border: 3px solid #525252;
+}
+  
+.ds-perfil .foto::after{
+      content: '';
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: green;
+      bottom: 0;
+      right: 0;
+      border-radius: 50%;
+}
+  
+.ds-perfil .foto ion-icon{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+}
+  
+.ds-perfil .info-perfil{
+      transition: 0.5s;
+      display: none;
+}
+
+.ds-perfil .info-perfil.hidden{
+      transition: 1s ;
+      display: flex;
+      padding-left: 20px;
+}
+  
+.ds-perfil .info-perfil.hidden span{
+      font-size: 12px;
+      color: #bcbcbd;
+}
+  
+  .ds-perfil .info-perfil h3{
+      font-size: 1.2em;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      font-weight: 500;
+      margin-top: -5px;
+  }
+  
+  .sign-off{
+      position: absolute;
+      bottom: 0;
+      width: 80%;
+      display: flex;
+      padding-bottom: 35px;
+      overflow: hidden;
+  }
+
+  .sign-off a{
+      background: transparent;
+      display: flex;
+      white-space: nowrap;
+      color: var(--white);
+      margin-top: 100px;
+  }
+
+.sign-off a:hover .icon,
+.sign-off a:hover .text
+{
+      color: var(--green);
+      transition: 0.5s;
+}
+
+.sign-off a .icon{
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-width: 60px;
+      height: 50px;
+      font-size: 1.6em;
+      color: var(--white);
+      transition: 0.5s;
+}
+  
+.sign-off a .text{
+      position: relative;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      font-size: 1em;
+      color: var(--white);
+      padding-left: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      transition: 0.5s;
+}
+
+.line{
+      background-color: #606064;
+      position: relative;
+      width: 80%;
+      top: -25px;
+      height: 1px;
+}
+
+.line.short{
+      background-color: #606064;
+      position: relative;
+      width: 93%;
+      top: -25px;
+      height: 1px;
+}
+
+.line-two{
+      width: 70%;
+      height: 1px;
+      background-color: #606064;
+      position: absolute;
+      bottom: 100px;
+}
+
+.line-two.short{
+      width: 85%;
+      height: 1px;
+      background-color: #606064;
+      position: absolute;
+      bottom: 100px;
+}
+  
+  /*===================================
+      ESTILOS PANEL RIGHT
+  ===================================*/
+.ds-panel{
+    width: calc(100%);
+    padding: 20px 30px 20px 40px;
+    background: var(--bg);
+}
+
+.ds-panel .panel-header{
+    width: 100%;
+    background: var(--container);
+    padding: 8px;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.ds-panel .panel-header .icono{
+    width: 50px;
+    inset: 1;
+    border-radius: 10px;
+    text-align: center;
+    padding: 6px 0px 0px 0px;
+    font-size: 1.7em;
+    margin-right: 20px;
+    color: var(--white);
+    background: var(--green);
+}
+
+.ds-panel .panel-header h2{
+    font-size: 1.7em;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--white);
+}
+
+.ds-panel-content{
+      background: var(--container);
+      padding: 20px;
+      border-radius: 20px;
+      margin: 0px auto;
+      width: 900px;
+}
+
+.logbook-form{
+      display: grid;
+      margin-top: 2rem;
+      grid-template-columns: repeat(2, 1fr);
+      column-gap: 2rem;
+      row-gap: 1rem;
+}
+
+.input-wrap{
+      position: relative;
+}
+
+.input-wrap.w-100{
+      grid-column: span 2;
+}
+
+.logbook-input{
+      width: 100%;
+      background-color: #1f2225;
+      padding: 1.5rem 1.35rem calc(0.75rem - 2px) 1.35rem;
+      border: none;
+      outline: none;
+      font-family: inherit;
+      border-radius: 20px;
+      color: var(--white);
+      font-weight: 600;
+      font-size: 0.95rem;
+      border: 2px solid transparent;
+      box-shadow: 0 0 0 0px hsla(var(--green), 92%, 54%, 0.169);
+      transition: 0.3s;
+}
+
+.logbook-input:hover{
+      background-color: #1b1e22;
+}
+
+.input-wrap label{
+      position: absolute;
+      top: 25%;
+      left: calc(1.35rem + 2px);
+      transform: translateY(-50%);
+      color: #6db23e;
+      pointer-events: none;
+      font-weight: 600;
+}
+
+.input-wrap label.text{
+      position: absolute;
+      top: 23% !important;
+}
+
+.input-wrap .icon{
+      position: absolute;
+      right: calc(1.35rem + 2px);
+      top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none;
+      color: var(--green);
+      font-size: 1.5rem;
+      font-weight: 900;
+}
+
+textarea.logbook-input{
+      resize: none;
+      width: 100%;
+      min-height: 150px;
+}
+
+textarea.logbook-input ~ label{
+      top: 1.2rem;
+}
+
+textarea.logbook-input ~ .icon{
+      top: 1.3rem;
+      transform: none;
+}
+
+.input-wrap.focus .logbook-input{
+      border: 2px solid var(--green);
+}
+
+.input-wrap.textarea.not-empty label{
+      font-size: .7rem;
+      top: 10.75rem;
+      transform: translateY(-24px);
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+      display: none;
+}
+
+input[type="time"]::-webkit-calendar-picker-indicator {
+      display: none;
+}
+
+.logbook-buttons{
+      display: grid;
+      grid-template-columns: 1fr;
+      margin-top: 1rem !important;
+      margin-bottom: 2rem !important;
+      margin: 0 auto;
+      width: 60%;
+      grid-column: span 2;
+
+}
+
+.btn-registrar{
+      display: inline-block;
+      padding: 1.1rem 2rem;
+      background-image: linear-gradient(to right, #6db23e, #7bbd4e, #6db23e);
+      border: none;
+      border-radius: 40px;
+      color: var(--white);
+      font-size: 1.2rem;
+      font-weight: 700;
+      background-size: 200%;
+      text-transform: uppercase;
+      transition: 0.7s;
+}
+
+.btn-registrar:hover{
+      background-position: right;
+}
+	  </style>
+</head>
+<body>
+      <div class="admin-dashboard">
+
+            <div class="ds-left-menu">
+    
+                <button class="btn-menu">
+                    <ion-icon name="chevron-back-circle"></ion-icon>
+                </button>
+    
+                <div class="ds-perfil">
+                    <div class="foto">
+                        <ion-icon name="person-circle"></ion-icon>
+                    </div>
+                    <div class="info-perfil">
+                        <h3>User</h3>
+                    </div>
+                </div>
+    
+                <div class="line"></div>
+
+                <div class="ds-menu">                    
+                    <ul div="menu-list">
+                        <li class="active">
+                            <a href="#">
+                                <div class="icon">
+                                    <ion-icon name="home"></ion-icon>
+                                </div>
+                                <div class="text">
+                                    <span>Home</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <div class="icon">
+                                    <ion-icon name="construct-outline"></ion-icon>
+                                </div>
+                                <div class="text">
+                                    <span>Productos</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <div class="icon">
+                                    <ion-icon name="cafe-outline"></ion-icon>
+                                </div>                           
+                                <div class="text">
+                                    <span>Ofertas</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <div class="icon">
+                                    <ion-icon name="cart-outline"></ion-icon>
+                                </div>
+                                <div class="text">
+                                    <span>Ordenes</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <div class="icon">
+                                    <ion-icon name="newspaper-outline"></ion-icon>
+                                </div>
+                                <div class="text">
+                                    <span>Reportes</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <div class="icon">
+                                    <ion-icon name="settings-outline"></ion-icon>
+                                </div>
+                                <div class="text">
+                                    <span>Ajustes</span>
+                                </div>
+                            </a>
+                        </li>    
+                    </ul> 
+                </div>
+    
+                <div class="line-two"></div>
+
+                <div class="sign-off">
+                    <a href="#" class="btn-sign-off">
+                        <div class="icon">
+                            <ion-icon name="log-out-outline"></ion-icon>
+                        </div>
+                        <div class="text">
+                            <span>Logout</span>
+                        </div>
+                    </a>
+                </div>
+                 
+            </div>
+
+            <div class="ds-panel">
+           
+                <div class="panel-header">
+                    <div class="icono">
+                        <ion-icon name="bug-outline"></ion-icon>
+                    </div>
+                    <h2>Reportar Incidencia</h2>
+                </div>
+    
+                <div class="ds-panel-content"> 
+				  <form th:action="@{/crearIncidencia}" method="post" class="logbook-form">
+					    <div class="input-wrap">
+					        <input type="date" autocomplete="off" th:field="${incidencia.fecha}" class="logbook-input" required>
+					        <label>Fecha</label>
+					        <ion-icon class="icon" name="calendar-outline"></ion-icon>
+					    </div>
+					
+					    <div class="input-wrap">
+					        <input type="time" autocomplete="off" th:field="${incidencia.hora}" class="logbook-input" required>
+					        <label>Hora</label>
+					        <ion-icon class="icon" name="time-outline"></ion-icon>
+					    </div>
+					
+					    <div class="input-wrap w-100">
+					        <input type="text" autocomplete="off" th:field="${incidencia.nombre}" class="logbook-input" required>
+					        <label>Nombre</label>
+					        <ion-icon class="icon" name="chatbubble-ellipses-outline"></ion-icon>
+					    </div>
+					
+					    <div class="input-wrap textarea w-100">
+					        <textarea th:field="${incidencia.descripcion}" autocomplete="off" class="logbook-input" required></textarea>
+					        <label class="text">Descripción</label>
+					        <ion-icon class="icon" name="chatbubble-ellipses-outline"></ion-icon>
+					    </div>
+					
+					    <div class="logbook-buttons w-100">
+					        <button class="btn-registrar registrar" type="submit">Reportar</button>
+					    </div>
+					</form>
+
+                </div>
+    
+            </div>
+    
+        </div>
+    
+</body>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<script>
+    let btnmenu = document.querySelector('.btn-menu');
+    let dsleftmenu = document.querySelector('.ds-left-menu');
+    let line = document.querySelector('.line');
+    let linetwo = document.querySelector('.line-two');
+    let infoperfil = document.querySelector('.info-perfil');
+
+    btnmenu.onclick = function(){
+        btnmenu.classList.toggle('rotate');
+        dsleftmenu.classList.toggle('active');
+        line.classList.toggle('short');
+        linetwo.classList.toggle('short');
+        infoperfil.classList.toggle('hidden');
+    }
+
+    let menulist = document.querySelectorAll('.ds-menu ul li');
+    function activeLink(){
+        menulist.forEach((item)=>
+        item.classList.remove('active'));
+        this.classList.add('active')
+    }
+    menulist.forEach((item)=>
+    item.addEventListener('click', activeLink));
+
+
+    const inputs = document.querySelectorAll(".logbook-input");
+
+    inputs.forEach(ipt =>{
+        ipt.addEventListener("focus", () =>{
+            ipt.parentNode.classList.add("focus");
+            ipt.parentNode.classList.add("not-empty");
+        });
+        ipt.addEventListener("blur", () =>{
+            if(ipt.value == ""){
+                ipt.parentNode.classList.remove("not-empty");
+            }
+            ipt.parentNode.classList.remove("focus");
+        });
+    });
+</script>
+</html>

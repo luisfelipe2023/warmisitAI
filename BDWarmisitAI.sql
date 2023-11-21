@@ -13,8 +13,6 @@ INSERT INTO tbl_Incidencia_Reportada (fecha, hora, nombre, descripcion)
 VALUES ('2023-11-18', '12:30:00', 'Error de Conexión de Red', 'Se ha reportado un error de conexión de red al intentar acceder a la aplicación.');
 select * from tbl_Incidencia_Reportada;
 
-
-
 CREATE TABLE IF NOT EXISTS tbl_Tecnico (
     id_tecnico INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(255),
