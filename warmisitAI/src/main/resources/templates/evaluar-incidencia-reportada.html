@@ -628,24 +628,24 @@ input[type="time"]::selection{
     
                 <div class="ds-panel-content"> 
                   <form action="/agregarTipoIncidencia" method="post" class="logbook-form">
-				        <div class="input-wrap w-100">
-				            <select name="idTipoIncidencia" class="logbook-input">
-				                <option value="" >Seleccione</option>
-				                <!-- Aquí debes iterar sobre los tipos de incidencia disponibles -->
-				                <option th:each="tipo : ${tiposIncidencia}" th:value="${tipo.idIncidencia}" th:text="${tipo.nombre}"></option>
-				            </select>
-				            <label>Tipo</label>
-				            <ion-icon class="icon" name="ticket-outline"></ion-icon>
-				        </div>
-				
-				        <div class="logbook-buttons w-100">
-				            <!-- Asegúrate de incluir el ID de la incidencia reportada en tu formulario -->
-				            <input type="hidden" name="idIncidenciaReportada" th:value="${incidencia.id}" />
-				            <button type="submit" class="btn-registrar registrar">
-				                Evaluar
-				            </button>
-				        </div>
-				    </form>
+					    <div class="input-wrap w-100">
+					        <select name="idTipoIncidencia" class="logbook-input">
+					            <option value="">Seleccione</option>
+					            <!-- Aquí debes iterar sobre los tipos de incidencia disponibles -->
+					            <option th:each="tipo : ${tiposIncidencia}" th:value="${tipo.idTipoIncidencia}" th:text="${tipo.nombre}"></option>
+					        </select>
+					        <label>Tipo</label>
+					        <ion-icon class="icon" name="ticket-outline"></ion-icon>
+					    </div>
+					
+					    <div class="logbook-buttons w-100">
+					        <!-- Asegúrate de incluir el ID de la incidencia reportada en tu formulario -->
+					        <input type="hidden" name="idIncidenciaReportada" th:value="${incidencia.id}" />
+					        <button type="submit" class="btn-registrar registrar">
+					            Evaluar
+					        </button>
+					    </div>
+					</form>
                 </div>
     
             </div>

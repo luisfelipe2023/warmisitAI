@@ -509,9 +509,13 @@ a{
                       <h2>¿Ocurrió un incidente?</h2>
                   </div>
 
-                  <form th:action="@{/crearIncidenciaForm}" method="post">
-                		<input type="submit" class="btn" value="Reportalo">
-            	  </form>
+                  <form th:action="@{/crearIncidencia}" method="post">
+				    <input type="hidden" name="redirect" th:value="${'/crearIncidenciaForm'}">
+				    <!-- Otros campos del formulario aquí -->
+				    <input type="submit" class="btn" value="Reportalo">
+				</form>
+
+
 
             </div>           
         </div>

@@ -6,20 +6,21 @@ import lombok.*;
 @Data
 @Entity
 @Table(name="tbl_Tipo_Incidencia_Reportado")
-@NoArgsConstructor//ESTA ANOTACION SIRVE PARA GENERAR CONSTRUCTOR VACIO
-@AllArgsConstructor//ESTA ANOTACION SIRVE PARA GENER CONSTRUCTOR USANDO LOS ATRIBUTOS
+@NoArgsConstructor
+@AllArgsConstructor
 public class TipoIncidenciaReportada {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public int idIncidencia;
-	public String nombre;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_tipo_incidencia")
+    private int idTipoIncidencia;
+    private String nombre;
 	
 	
-	public int getIdIncidencia() {
-		return idIncidencia;
+	public int getIdTipoIncidencia() {
+		return idTipoIncidencia;
 	}
-	public void setIdIncidencia(int idIncidencia) {
-		this.idIncidencia = idIncidencia;
+	public void setIdTipoIncidencia(int idTipoIncidencia) {
+		this.idTipoIncidencia = idTipoIncidencia;
 	}
 	public String getNombre() {
 		return nombre;

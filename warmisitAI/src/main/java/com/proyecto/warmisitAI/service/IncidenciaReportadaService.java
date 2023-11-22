@@ -37,7 +37,7 @@ public class IncidenciaReportadaService {
 	 public void agregarTipoIncidencia(int idIncidenciaReportada, int idTipoIncidencia) {
 	        IncidenciaReportada incidencia = obtenerIncidenciaPorId(idIncidenciaReportada);
 	        TipoIncidenciaReportada tipoIncidencia = new TipoIncidenciaReportada();
-	        tipoIncidencia.setIdIncidencia(idTipoIncidencia);
+	        tipoIncidencia.setIdTipoIncidencia(idTipoIncidencia);
 
 	        // Establecer el tipo de incidencia en la incidencia reportada
 	        incidencia.setTipoIncidencia(tipoIncidencia);

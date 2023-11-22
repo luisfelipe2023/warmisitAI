@@ -23,6 +23,7 @@ BEGIN
 END //
 DELIMITER ;
 
+
 CREATE TABLE IF NOT EXISTS tbl_Tipo_Incidencia_Reportado (
     id_tipo_incidencia INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(50)

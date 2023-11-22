@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -5,13 +6,28 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <link rel="stylesheet" href="./style/listaIncidenciasReportados.css">
       <title>Lista de Incidentes Reportados</title>
+      
+	<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
+
+<!-- Popper.js -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+
+ 		<!-- Agregar Bootstrap -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+	
+	<!-- Bootstrap JS -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+		crossorigin="anonymous"></script>
       <style>
 		  @import url('https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap');
 
 *{
-      margin: 0;
+      margin: 0 ;
       padding: 0;
-      box-sizing: border-box;
+      box-sizing: border-box ;
       font-family: 'Poppins', sans-serif;
 }
 
@@ -91,15 +107,18 @@ a{
 }
   
 .ds-menu{
-      width: 100%;
-      overflow-x: scroll;
-      height: 100%;
-      padding-bottom: 150px;
-      padding-top: 50px;
+      width: 100% !important;
+      overflow-x: scroll !important;
+      height: 100% !important;
+      padding-bottom: 150px !important;
+      padding-top: 50px !important;
 }
   
+  
 .ds-menu ul li{
-      position: relative;
+      position: relative !important;
+      left: -30px !important;
+      width: 100% !important;
 }
 
 .ds-menu ul li.active{
@@ -108,30 +127,6 @@ a{
       border-bottom-left-radius: 50px;
 }
 
-.ds-menu ul li.active::before{
-      content: '';
-      position: absolute;
-      top: -20px;
-      right: 0;
-      width: 20px;
-      height: 20px;
-      border-bottom-right-radius: 20px;
-      box-shadow: 5px 5px 0px 5px var(--bg);
-      background-color: transparent;
-}
-
-.ds-menu ul li.active::after{
-      content: '';
-      position: absolute;
-      bottom: -20px;
-      right: 0;
-      width: 20px;
-      height: 20px;
-      border-top-right-radius: 20px;
-      box-shadow: 5px -2px 0px 2px var(--bg);
-      background-color: transparent;
-      
-}
   
 .ds-menu ul li a{
       cursor: pointer;
@@ -229,6 +224,7 @@ a{
 }
   
 .ds-perfil .info-perfil{
+	padding-top: 10px;
       transition: 0.5s;
       display: none;
 }
@@ -265,6 +261,7 @@ a{
       background: transparent;
       display: flex;
       white-space: nowrap;
+      text-decoration: none;
       color: var(--white);
       margin-top: 100px;
   }
@@ -365,17 +362,64 @@ a{
 }
 
 .ds-panel .panel-header h2{
-    font-size: 1.7em;
+	padding-top: 10px;
+	font-size: 1.7em;
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     color: var(--white);
 }
+  
+.panel-insights{
+      width: 100%;
+      float: left;
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+}
+
+.box{
+      width: 320px;
+      height: 120px;
+      background-color: var(--container);
+      margin-left: 10px;
+      padding: 10px;
+      border-radius: 2rem;
+      cursor: pointer;
+}
+
+.box p{
+      color: var(--white);
+      font-weight: bold;
+      line-height: 30px;
+      padding-left: 19px;
+      margin-top: 5px;
+      display: inline-block;
+}
+
+.box p [style="color: white;"]{
+	 font-size: 37px;
+	 padding-top: 10px;
+	 padding-bottom: 10px;
+}
+.box p span{
+      font-size: 27px;
+      font-weight: 800;
+      text-transform: uppercase;
+      color:var(--green);
+      display: block;
+      margin-top: 2px;
+}
+
+.box ion-icon{
+      font-size: 70px !important;
+      float: right;
+      margin-top: 17px !important;
+      color: var(--green);
+      padding-right: 20px;
+}
 
 /****************************/
-.table-container{
-      margin-top: 2rem;
-}
 
 .table-container h2{
       margin-bottom: 0.8rem;
@@ -386,13 +430,15 @@ a{
       background: var(--container);
       width: 100%;
       border-radius: 2rem;
-      padding: 1rem;
+      padding: 1.5rem;
+      padding-bottom: 5rem;
       text-align: center;
       transition: all 300ms ease;
 }
 
 table thead th{
       color: #6db23e;
+      padding: 15px;
 }
 
 table tbody td{
@@ -401,15 +447,25 @@ table tbody td{
 }
 
 table tbody tr .primary a{
+      padding: 7px;
       text-decoration: none;
       text-transform: uppercase;
-      font-weight: 500;
       color: var(--green);
 }
 
 table tbody tr .primary a:hover{
-      text-decoration: underline;  
+      width: 30px;
+      height: 50px;
+      background-color: var(--green);
+      border-radius: 10px;
+      color: var(--white);
 }
+
+#detalleTecnicoModal .modal-dialog .modal-header.custom-modal-header {
+    background-color: var(--container);
+    color: #fff; 
+}
+
 	  </style>
 </head> 
 <body>
@@ -536,10 +592,16 @@ table tbody tr .primary a:hover{
 					            <td th:text="${#temporals.format(incidencia.hora, 'HH:mm:ss')}"></td>
 					            <td th:text="${incidencia.nombre}"></td>
 					            <td class="primary">
-								    <a th:href="@{/evaluarIncidencia(id=${incidencia.id})}">Evaluar</a>
+									<a href="#">Evaluar</a>
 								</td>
 								<td class="primary"> 
-									<a href="#">Ver Detalle</a>
+									<button type="button" class="btn btn-primary btn-ver-detallesIncidencia" 
+										th:attr="data-incidencia='{&quot;fecha&quot;: &quot;'+${#temporals.format(incidencia.fecha, 'yyyy-MM-dd')}+'&quot;,
+										                           &quot;hora&quot;: &quot;'+${#temporals.format(incidencia.hora, 'HH:mm:ss')}+'&quot;,
+										                           &quot;nombre&quot;: &quot;'+${incidencia.nombre}+'&quot;,
+										                           &quot;descripcion&quot;: &quot;'+${incidencia.descripcion}+'&quot;}'">
+                        			Ver Detalles
+                    			</button>
 								</td>
 					        </tr>
                         </tbody>
@@ -547,6 +609,46 @@ table tbody tr .primary a:hover{
             </div>
     
         </div>
+        
+      </div>
+      <div class="modal fade" id="detalleIncidenciaReportada" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header custom-modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Detalle Incidencia Reportada</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					
+					<div class="modal-body">
+						<div class="mb-3">
+							<label for="fecha">Fecha</label>
+							<input type="date"class="form-control" id="fecha" readonly disabled="true">
+						</div>
+						
+						<div class="mb-3">
+							<label for="hora">Hora</label>
+							<input type="datetime"class="form-control" id="hora" readonly disabled="true">
+						</div>
+						
+						<div class="mb-3">
+							<label for="nombre">Nombre</label>
+							<input type="text"class="form-control" id="nombre" readonly disabled="true">
+						</div>
+						
+						<div class="mb-3">
+							<label for="descripcion">Descripcion:</label>
+							<textarea class="form-control" id="descripcion" readonly disabled="true"></textarea>
+						</div>
+						
+						
+					</div>
+					
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+					</div>
+				</div>
+			</div>	  
+	  </div>
     
 </body>
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
@@ -574,6 +676,20 @@ table tbody tr .primary a:hover{
     }
     menulist.forEach((item)=>
     item.addEventListener('click', activeLink));
+    /**		MODAL	**/
+    $(document).on("click", ".btn-ver-detallesIncidencia", function() {
+    const incidencia = $(this).data("incidencia");
+    
+    $("#fecha").val(incidencia.fecha);
+    $("#hora").val(incidencia.hora);
+    $("#nombre").val(incidencia.nombre);
+    $("#descripcion").val(incidencia.descripcion);
+   
+   $("#detalleIncidenciaReportada").modal("show");
+   
+});
+
+
 </script>
 </html>
 
