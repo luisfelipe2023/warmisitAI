@@ -8,18 +8,24 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.proyecto.warmisitAI.models.IncidenciaReportada;
+import com.proyecto.warmisitAI.models.TipoIncidenciaReportada;
+import com.proyecto.warmisitAI.repository.TipoIncidenciaReportadaRepository;
 import com.proyecto.warmisitAI.service.IncidenciaReportadaService;
+import com.proyecto.warmisitAI.service.TipoIncidenciaReportadaService;
 
 @Controller
 
 public class IncidenciaReportadaController {
 	private final IncidenciaReportadaService incidenciaReportadaService;
+	private final TipoIncidenciaReportadaService tipoIncidenciaReportadaService;
 
     @Autowired
-    public IncidenciaReportadaController(IncidenciaReportadaService incidenciaReportadaService) {
+    public IncidenciaReportadaController(IncidenciaReportadaService incidenciaReportadaService, TipoIncidenciaReportadaService tipoIncidenciaReportadaService) {
         this.incidenciaReportadaService = incidenciaReportadaService;
+        this.tipoIncidenciaReportadaService = tipoIncidenciaReportadaService;
     }
 	 @GetMapping("/listaIncidenciasReportadas")
 	 public String mostrarListaIncidenciasReportadas(Model model) {
@@ -37,11 +43,23 @@ public class IncidenciaReportadaController {
 	  @PostMapping("/crearIncidencia")
 	  public String crearIncidencia(@ModelAttribute IncidenciaReportada incidencia) {
 	      incidenciaReportadaService.guardarIncidenciasReportadas(incidencia);
-	      return "redirect:/mostrarMenu";
+	      return "redirect:/crearIncidenciaForm";
 	  }
 	  
-	  @GetMapping("/menu")
-	    public String mostrarMenu() {
-	        return "menu";
+	  
+	  @GetMapping("/evaluarIncidencia")
+	    public String mostrarFormularioEvaluarIncidencia(@RequestParam("id") int idIncidencia, Model model) {
+	        List<TipoIncidenciaReportada> tiposIncidencia = tipoIncidenciaReportadaService.obtenerTipoIncidenciaReportada();
+	        IncidenciaReportada incidencia = incidenciaReportadaService.obtenerIncidenciaPorId(idIncidencia);
+	        model.addAttribute("tiposIncidencia", tiposIncidencia);
+	        model.addAttribute("incidencia", incidencia);
+	        return "evaluar-incidencia-reportada";
 	    }
-}
+
+	    @PostMapping("/agregarTipoIncidencia")
+	    public String agregarTipoIncidencia(@RequestParam("idIncidenciaReportada") int idIncidenciaReportada, 
+	                                         @RequestParam("idTipoIncidencia") int idTipoIncidencia) {
+	        incidenciaReportadaService.agregarTipoIncidencia(idIncidenciaReportada, idTipoIncidencia);
+	        return "redirect:/listaIncidenciasReportadas";
+	    }}
+

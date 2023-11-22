@@ -29,4 +29,7 @@
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestParam"/>
     <fullyQualifiedTypeName name="com.proyecto.warmisitAI.models.Estado"/>
     <fullyQualifiedTypeName name="com.proyecto.warmisitAI.models.Especialidad"/>
+    <fullyQualifiedTypeName name="com.proyecto.warmisitAI.models.IncidenciaReportada"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PostMapping"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.ModelAttribute"/>
 </qualifiedTypeNameHistroy>
