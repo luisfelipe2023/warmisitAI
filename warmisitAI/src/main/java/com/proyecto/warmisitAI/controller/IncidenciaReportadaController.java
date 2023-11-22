@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.proyecto.warmisitAI.models.IncidenciaReportada;
+import com.proyecto.warmisitAI.models.IncidenciaDTO;
 import com.proyecto.warmisitAI.models.TipoIncidenciaReportada;
 import com.proyecto.warmisitAI.repository.TipoIncidenciaReportadaRepository;
 import com.proyecto.warmisitAI.service.IncidenciaReportadaService;
@@ -79,6 +80,18 @@ public class IncidenciaReportadaController {
 	    public String agregarTipoIncidencia(@RequestParam("idIncidenciaReportada") int idIncidenciaReportada, 
 	                                         @RequestParam("idTipoIncidencia") int idTipoIncidencia) {
 	        incidenciaReportadaService.agregarTipoIncidencia(idIncidenciaReportada, idTipoIncidencia);
-	        return "redirect:/listaIncidenciasReportadas";
-	    }}
+	        return "redirect:/listaIncidenciasEvaluadas";
+	    }
+	    
+	    
+	    @GetMapping("/listaIncidenciasEvaluadas")
+	    public String mostrarListaIncidenciasEvaluadas(Model model) {
+	        List<IncidenciaDTO> incidenciasEvaluadas = incidenciaReportadaService.obtenerIncidenciasEvaluadas();
+	        model.addAttribute("incidenciasReportadas", incidenciasEvaluadas);
+	        return "lista-incidencias-evaluadas";
+	    }
+
+}
+
+
 

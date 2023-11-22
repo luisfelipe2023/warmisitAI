@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.proyecto.warmisitAI.models.IncidenciaDTO;
 import com.proyecto.warmisitAI.models.IncidenciaReportada;
 import com.proyecto.warmisitAI.models.Tecnico;
 import com.proyecto.warmisitAI.models.TipoIncidenciaReportada;
@@ -44,5 +45,11 @@ public class IncidenciaReportadaService {
 
 	        // Guardar la incidencia actualizada
 	        incidenciaReportadaRepository.save(incidencia);
+	    }
+	 
+	 
+	 
+	 public List<IncidenciaDTO> obtenerIncidenciasEvaluadas() {
+	        return incidenciaReportadaRepository.listaIncidenciaEvaluada();
 	    }
 }

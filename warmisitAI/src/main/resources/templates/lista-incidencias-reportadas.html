@@ -592,7 +592,7 @@ table tbody tr .primary a:hover{
 					            <td th:text="${#temporals.format(incidencia.hora, 'HH:mm:ss')}"></td>
 					            <td th:text="${incidencia.nombre}"></td>
 					            <td class="primary">
-									<a href="#">Evaluar</a>
+									<a th:href="@{/evaluarIncidencia(id=${incidencia.id})}">Evaluar</a>
 								</td>
 								<td class="primary"> 
 									<button type="button" class="btn btn-primary btn-ver-detallesIncidencia" 
