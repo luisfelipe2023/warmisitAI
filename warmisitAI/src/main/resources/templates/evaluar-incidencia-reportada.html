@@ -520,7 +520,7 @@ input[type="time"]::selection{
 <body>
       <div class="admin-dashboard">
 
-            <div class="ds-left-menu">
+             <div class="ds-left-menu">
     
                 <button class="btn-menu">
                     <ion-icon name="chevron-back-circle"></ion-icon>
@@ -531,7 +531,7 @@ input[type="time"]::selection{
                         <ion-icon name="person-circle"></ion-icon>
                     </div>
                     <div class="info-perfil">
-                        <h3>User</h3>
+                        <h3>[[${user.getFullname()}]]</h3>
                     </div>
                 </div>
     
@@ -540,7 +540,7 @@ input[type="time"]::selection{
                 <div class="ds-menu">                    
                     <ul div="menu-list">
                         <li class="active">
-                            <a href="#">
+                            <a href="/admin-page">
                                 <div class="icon">
                                     <ion-icon name="home"></ion-icon>
                                 </div>
@@ -550,69 +550,51 @@ input[type="time"]::selection{
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="/listaIncidenciasReportadas">
                                 <div class="icon">
                                     <ion-icon name="construct-outline"></ion-icon>
                                 </div>
                                 <div class="text">
-                                    <span>Productos</span>
+                                    <span>Incidentes R.</span>
                                 </div>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="/listadoDeIncidenciasEvaluadas">
                                 <div class="icon">
-                                    <ion-icon name="cafe-outline"></ion-icon>
+                                    <ion-icon name="folder-open-outline"></ion-icon>
                                 </div>                           
                                 <div class="text">
-                                    <span>Ofertas</span>
+                                    <span>Incidentes E.</span>
                                 </div>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="/listaDeTecnicos">
                                 <div class="icon">
-                                    <ion-icon name="cart-outline"></ion-icon>
+                                    <ion-icon name="hammer-outline"></ion-icon>
                                 </div>
                                 <div class="text">
-                                    <span>Ordenes</span>
+                                    <span>Tecnicos</span>
                                 </div>
                             </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <div class="icon">
-                                    <ion-icon name="newspaper-outline"></ion-icon>
-                                </div>
-                                <div class="text">
-                                    <span>Reportes</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <div class="icon">
-                                    <ion-icon name="settings-outline"></ion-icon>
-                                </div>
-                                <div class="text">
-                                    <span>Ajustes</span>
-                                </div>
-                            </a>
-                        </li>    
+                        </li>   
                     </ul> 
                 </div>
     
                 <div class="line-two"></div>
 
                 <div class="sign-off">
-                    <a href="#" class="btn-sign-off">
-                        <div class="icon">
-                            <ion-icon name="log-out-outline"></ion-icon>
-                        </div>
-                        <div class="text">
-                            <span>Logout</span>
-                        </div>
-                    </a>
+					<span sec:authorize="isAuthenticated">
+					   <a th:href="@{/logout}" class="btn-sign-off">
+						   <div class="icon">
+						       <ion-icon name="log-out-outline"></ion-icon>
+						   </div>
+						   <div class="text">
+						      <span>Logout</span>
+						   </div>
+					   </a>
+					</span>
                 </div>
                  
             </div>

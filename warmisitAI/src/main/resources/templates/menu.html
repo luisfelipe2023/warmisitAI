@@ -413,7 +413,7 @@ a{
                         <ion-icon name="person-circle"></ion-icon>
                     </div>
                     <div class="info-perfil">
-                        <h3>User</h3>
+                        <h3>[[${user.getFullname()}]]</h3>
                     </div>
                 </div>
     
@@ -431,71 +431,24 @@ a{
                                 </div>
                             </a>
                         </li>
-                        <li>
-                            <a href="#">
-                                <div class="icon">
-                                    <ion-icon name="construct-outline"></ion-icon>
-                                </div>
-                                <div class="text">
-                                    <span>Productos</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <div class="icon">
-                                    <ion-icon name="cafe-outline"></ion-icon>
-                                </div>                           
-                                <div class="text">
-                                    <span>Ofertas</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <div class="icon">
-                                    <ion-icon name="cart-outline"></ion-icon>
-                                </div>
-                                <div class="text">
-                                    <span>Ordenes</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <div class="icon">
-                                    <ion-icon name="newspaper-outline"></ion-icon>
-                                </div>
-                                <div class="text">
-                                    <span>Reportes</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <div class="icon">
-                                    <ion-icon name="settings-outline"></ion-icon>
-                                </div>
-                                <div class="text">
-                                    <span>Ajustes</span>
-                                </div>
-                            </a>
-                        </li>    
+                           
                     </ul> 
                 </div>
     
                 <div class="line-two"></div>
 
                 <div class="sign-off">
-                    <a href="#" class="btn-sign-off">
-                        <div class="icon">
-                            <ion-icon name="log-out-outline"></ion-icon>
-                        </div>
-                        <div class="text">
-                            <span>Logout</span>
-                        </div>
-                    </a>
-                </div>
+					<span sec:authorize="isAuthenticated">
+					   <a th:href="@{/logout}" class="btn-sign-off">
+						   <div class="icon">
+						       <ion-icon name="log-out-outline"></ion-icon>
+						   </div>
+						   <div class="text">
+						      <span>Logout</span>
+						   </div>
+					   </a>
+					</span>
+                </div>	
                  
             </div>
 

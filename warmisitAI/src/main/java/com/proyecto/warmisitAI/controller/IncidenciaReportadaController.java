@@ -1,8 +1,11 @@
 package com.proyecto.warmisitAI.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +25,8 @@ import com.proyecto.warmisitAI.service.TipoIncidenciaReportadaService;
 public class IncidenciaReportadaController {
 	
 	
+	@Autowired
+	UserDetailsService userDetailsService;
 	private final IncidenciaReportadaService incidenciaReportadaService;
 	private final TipoIncidenciaReportadaService tipoIncidenciaReportadaService;
 
@@ -36,17 +41,21 @@ public class IncidenciaReportadaController {
     
     
 	 @GetMapping("/listaIncidenciasReportadas")
-	 public String mostrarListaIncidenciasReportadas(Model model) {
+	 public String mostrarListaIncidenciasReportadas(Model model, Principal principal) {
 	        List<IncidenciaReportada> incidenciasReportadas = incidenciaReportadaService.obtenerIncidenciasReportadas();
 	        model.addAttribute("incidenciasReportadas", incidenciasReportadas);
+	        UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
+			model.addAttribute("user", userDetails);
 	        return "lista-incidencias-reportadas";
 	    }
 	 
 	 
 	 
 	 @GetMapping("/crearIncidenciaForm")
-	 public String mostrarFormularioIncidencia(Model model) {
+	 public String mostrarFormularioIncidencia(Model model, Principal principal) {
 	      model.addAttribute("incidencia", new IncidenciaReportada());
+	      UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
+	      model.addAttribute("user", userDetails);
 	      return "crear-incidencia-form";
 	  }
 
@@ -67,11 +76,13 @@ public class IncidenciaReportadaController {
 	  
 	  
 	  @GetMapping("/evaluarIncidencia")
-	  public String mostrarFormularioEvaluarIncidencia(@RequestParam("id") int idIncidencia, Model model) {
+	  public String mostrarFormularioEvaluarIncidencia(@RequestParam("id") int idIncidencia, Model model, Principal principal) {
 	      List<TipoIncidenciaReportada> tiposIncidencia = tipoIncidenciaReportadaService.obtenerTipoIncidenciaReportada();
 	      IncidenciaReportada incidencia = incidenciaReportadaService.obtenerIncidenciaPorId(idIncidencia);
 	      model.addAttribute("tiposIncidencia", tiposIncidencia);
 	      model.addAttribute("incidencia", incidencia);
+	      UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
+		  model.addAttribute("user", userDetails);
 	      return "evaluar-incidencia-reportada";
 	  }
 
@@ -85,12 +96,22 @@ public class IncidenciaReportadaController {
 	    
 	    
 	    @GetMapping("/listaIncidenciasEvaluadas")
-	    public String mostrarListaIncidenciasEvaluadas(Model model) {
+	    public String mostrarListaIncidenciasEvaluadas(Model model, Principal principal) {
 	        List<IncidenciaDTO> incidenciasEvaluadas = incidenciaReportadaService.obtenerIncidenciasEvaluadas();
 	        model.addAttribute("incidenciasReportadas", incidenciasEvaluadas);
+	        UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
+			model.addAttribute("user", userDetails);
 	        return "lista-incidencias-evaluadas";
 	    }
 
+	    @GetMapping("/listadoDeIncidenciasEvaluadas")
+	    public String mostrarListadoDeIncidenciasEvaluadas(Model model, Principal principal) {
+	        List<IncidenciaDTO> incidenciasEvaluadas = incidenciaReportadaService.obtenerIncidenciasEvaluadas();
+	        model.addAttribute("incidenciasReportadas", incidenciasEvaluadas);
+	        UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
+			model.addAttribute("user", userDetails);
+	        return "listaIncidenciasEvaluadas";
+	    }
 }
 
 
