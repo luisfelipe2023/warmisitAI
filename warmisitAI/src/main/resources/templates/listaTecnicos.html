@@ -127,21 +127,7 @@
 				</div>
 				
 			
-				<div class="box">
-					<p>
-						<span style="color: white;" th:text="${tecnicosDisponibles}"></span>
-						<span>Disponibles</span>
-					</p>
-					<ion-icon name="checkmark-circle-outline"></ion-icon>
-				</div>
-			
-				<div class="box">
-					<p>
-						<span style="color: white;" th:text="${tecnicosOcupados}"></span>
-						<span>Ocupados</span>
-					</p>
-					<ion-icon name="close-circle-outline"></ion-icon>
-				</div>
+		
 			</div>
 			
 
@@ -152,30 +138,25 @@
 				<table>
 					<thead>
 						<tr>
-							<th>Nombre</th>
-							<th>Apellidos</th>
+							
+							<th>Id Usuario</th>
+							<th>FullName</th>
 							<th>DNI</th>
-							<th>Teléfono</th>	
-							<th>Estado</th>
+							<th>Teléfono</th>
+							<th>Email</th>			
 							<th>Acciones</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr th:each="tecnico : ${tecnicos}">
-							<td th:text="${tecnico.nombre}"></td>
-							<td th:text="${tecnico.apellidos}"></td>
+							<td th:text="${tecnico.user.id}"></td>
+							<td th:text="${tecnico.user.fullname}"></td>
 							<td th:text="${tecnico.dni}"></td>
-							<td th:text="${tecnico.telefono}"></td>
-							<td th:text="${tecnico.estado}"></td>
+							<td th:text="${tecnico.telefono}"></td>	
+							<td th:text="${tecnico.user.email}"></td>
 							<td>
-								<button type="button" class="btn btn-primary btn-ver-detalles" th:attr="data-tecnico='{&quot;id_tecnico&quot;: &quot;'+${tecnico.id_tecnico}+'&quot;,
-                                                                                                                       &quot;nombre&quot;: &quot;'+${tecnico.nombre}+'&quot;,
-                                                                                                                       &quot;apellidos&quot;: &quot;'+${tecnico.apellidos}+'&quot;,
-                                                                                                                       &quot;dni&quot;: &quot;'+${tecnico.dni}+'&quot;,
-                                                                                                                       &quot;telefono&quot;: &quot;'+${tecnico.telefono}+'&quot;,
-                                                                                                                       &quot;estado&quot;: &quot;'+${tecnico.estado}+'&quot;}'">
-                        			Ver Detalles
-                    			</button>							
+								<button type="button" class="btn btn-primary ">Asignar</button>
+
 							</td>
 						</tr>
 					</tbody>
@@ -183,50 +164,7 @@
 			</div>
 
 		</div>
-		
-		<div class="modal fade" id="detalleTecnicoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header custom-modal-header">
-                <h5 style="text-align: center;" class="modal-title" id="exampleModalLabel">Detalles del Técnico</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="mb-3">
-                    <label for="idTecnico">ID:</label>
-                    <input type="text" class="form-control" id="idTecnico" readonly disabled="true">
-                </div>
-                <div class="mb-3">
-                    <label for="nombreTecnico">Nombre:</label>
-                    <input type="text" class="form-control" id="nombreTecnico" readonly disabled="true">
-                </div>
-                <div class="mb-3">
-                    <label for="apellidosTecnico">Apellidos:</label>
-                    <input type="text" class="form-control" id="apellidosTecnico" readonly disabled="true">
-                </div>
-                
-                <div class="mb-3">
-                    <label for="dni">Dni:</label>
-                    <input type="text" class="form-control" id="dni" readonly disabled="true">
-                </div>
-                
-                <div class="mb-3">
-                    <label for="Telefono">Telefono:</label>
-                    <input type="text" class="form-control" id="telefono" readonly disabled="true">
-                </div>
-                
-                 <div class="mb-3">
-                    <label for="estado">Estado:</label>
-                    <input type="text" class="form-control" id="estado" readonly disabled="true">
-                </div>
-                
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            </div>
-        </div>
-    </div>
-</div>
+	
 
 </body>
 
@@ -256,20 +194,8 @@
 	menulist.forEach((item) =>
 		item.addEventListener('click', activeLink));
 		
-/**MODAL**/
 
-$(document).on("click", ".btn-ver-detalles", function() {
-    const tecnico = $(this).data("tecnico");
-    
-    $("#idTecnico").val(tecnico.id_tecnico);
-    $("#nombreTecnico").val(tecnico.nombre);
-    $("#apellidosTecnico").val(tecnico.apellidos);
-    $("#dni").val(tecnico.dni);
-    $("#telefono").val(tecnico.telefono);
-    $("#estado").val(tecnico.estado);
-    
-    $("#detalleTecnicoModal").modal("show");
-});
+
 
 </script>
 

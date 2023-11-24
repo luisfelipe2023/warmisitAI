@@ -579,13 +579,14 @@ table tbody tr .primary a:hover{
 					            <td th:text="${incidencia.tipoIncidencia}"></td>
 					            <!-- Puedes utilizar un enlace para ver más detalles, aquí se asume que tienes un método en tu controlador para ver detalles -->
 					            <td class="primary">
-									<button type="button" class="btn btn-primary btn-ver-detallesIncidencia" 
-										th:attr="data-incidencia='{&quot;fecha&quot;: &quot;'+${#temporals.format(incidencia.fecha, 'yyyy-MM-dd')}+'&quot;,
-										                           &quot;hora&quot;: &quot;'+${#temporals.format(incidencia.hora, 'HH:mm:ss')}+'&quot;,
-										                           &quot;nombre&quot;: &quot;'+${incidencia.nombre}+'&quot;,
-										                           &quot;descripcion&quot;: &quot;'+${incidencia.descripcion}+'&quot;}'">
-                        				Ver Detalles
-                    				</button>
+									<button type="button" class="btn btn-primary btn-ver-detallesIncidencia"
+        th:attr="data-incidencia='{&quot;fecha&quot;: &quot;'+${#temporals.format(incidencia.fecha, 'yyyy-MM-dd')}+'&quot;,
+                                           &quot;hora&quot;: &quot;'+${#temporals.format(incidencia.hora, 'HH:mm:ss')}+'&quot;,
+                                           &quot;nombre&quot;: &quot;'+${incidencia.nombre}+'&quot;,
+                                           &quot;descripcion&quot;: &quot;'+${incidencia.descripcion}+'&quot;
+                                           }'">
+    Ver Detalles
+</button>
                     			</td>
 					        </tr>
 					    </tbody>
@@ -625,11 +626,6 @@ table tbody tr .primary a:hover{
 							<textarea class="form-control" id="descripcion" readonly disabled="true"></textarea>
 						</div>
 						
-						<div class="mb-3">
-							<label for="descripcion">Tipo:</label>
-							<textarea class="form-control" id="tipoIncidencia" readonly disabled="true"></textarea>
-						</div>
-						
 						
 					</div>
 					
@@ -639,7 +635,7 @@ table tbody tr .primary a:hover{
 				</div>
 			</div>	  
 	  </div>
-    
+      
 </body>
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
@@ -676,9 +672,9 @@ table tbody tr .primary a:hover{
     $("#hora").val(incidencia.hora);
     $("#nombre").val(incidencia.nombre);
     $("#descripcion").val(incidencia.descripcion);
-    $("#tipoIncidencia").val(incidencia.tipoIncidencia);
    
-   $("#detalleIncidenciaReportada").modal("show");
+   
+   $("#detalleIncidenciaEvaluada").modal("show");
    
 });
 

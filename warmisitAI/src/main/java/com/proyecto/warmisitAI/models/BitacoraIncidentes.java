@@ -1,8 +1,10 @@
 package com.proyecto.warmisitAI.models;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -14,62 +16,76 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data//GENERA LOS METODOS GET Y SET
+
 @Entity
-@Table(name="tbl_Incidencia_Reportada")
-@NoArgsConstructor//ESTA ANOTACION SIRVE PARA GENERAR CONSTRUCTOR VACIO
-@AllArgsConstructor//ESTA ANOTACION SIRVE PARA GENER CONSTRUCTOR USANDO LOS ATRIBUTOS
-public class IncidenciaReportada {
+@Table(name="Bitacora")
+@NoArgsConstructor
+@AllArgsConstructor
+public class BitacoraIncidentes {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public int id;
-	public LocalDate fecha;
-	public LocalTime hora;
-	public String nombre;
-	public String descripcion;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public int id;
 	
-	@ManyToOne
-	@JoinColumn(name = "id_tipo_incidencia")
-	public TipoIncidenciaReportada tipoIncidencia;
+    public Date fecha;   
 	
+    public String hora;
+    public String descripcion;
+
+    @ManyToOne
+    @JoinColumn(name = "id_tipo_incidencia")
+    public TipoIncidenciaReportada tipoIncidencia;
+
+    @ManyToOne
+    @JoinColumn(name = "incidencia_id")
+    public IncidenciaReportada incidencia;
+
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
-	public LocalDate getFecha() {
+
+	public Date getFecha() {
 		return fecha;
 	}
-	public void setFecha(LocalDate fecha) {
+
+	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
-	public LocalTime getHora() {
+
+	public String getHora() {
 		return hora;
 	}
-	public void setHora(LocalTime hora) {
+
+	public void setHora(String hora) {
 		this.hora = hora;
 	}
-	public String getNombre() {
-		return nombre;
-	}
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
+
 	public String getDescripcion() {
 		return descripcion;
 	}
+
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
+
 	public TipoIncidenciaReportada getTipoIncidencia() {
 		return tipoIncidencia;
 	}
+
 	public void setTipoIncidencia(TipoIncidenciaReportada tipoIncidencia) {
 		this.tipoIncidencia = tipoIncidencia;
 	}
-	
-	
-	
-	
+
+	public IncidenciaReportada getIncidencia() {
+		return incidencia;
+	}
+
+	public void setIncidencia(IncidenciaReportada incidencia) {
+		this.incidencia = incidencia;
+	}
+
+   
 }

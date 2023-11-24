@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Lista de Incidentes</title>
-      	<!-- jQuery -->
+    <meta charset="UTF-8">
+    <title>Listado de Bitácora de Incidentes</title>
+    	<!-- jQuery -->
 		<script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
 		
 		<!-- Popper.js -->
@@ -19,18 +18,15 @@
 			integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
 			crossorigin="anonymous"></script>
        
-        <style>
-@import url('https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap');
+</head>
+<style>
+	@import url('https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap');
 
 *{
-      margin: 0 ;
+      margin: 0;
       padding: 0;
-      box-sizing: border-box ;
+      box-sizing: border-box;
       font-family: 'Poppins', sans-serif;
-}
-
-::selection {
-      background-color: transparent; 
 }
 
 :root{
@@ -38,6 +34,10 @@
       --bg: #1b1e22;
       --container: #262a2d;
       --white: #fffefe;
+}
+
+::selection {
+      background-color: transparent; 
 }
 
 body{
@@ -105,18 +105,15 @@ a{
 }
   
 .ds-menu{
-      width: 100% !important;
-      overflow-x: scroll !important;
-      height: 100% !important;
-      padding-bottom: 150px !important;
-      padding-top: 50px !important;
+      width: 100%;
+      overflow-x: scroll;
+      height: 100%;
+      padding-bottom: 150px;
+      padding-top: 50px;
 }
   
-  
 .ds-menu ul li{
-      position: relative !important;
-      left: -30px !important;
-      width: 100% !important;
+      position: relative;
 }
 
 .ds-menu ul li.active{
@@ -125,6 +122,30 @@ a{
       border-bottom-left-radius: 50px;
 }
 
+.ds-menu ul li.active::before{
+      content: '';
+      position: absolute;
+      top: -20px;
+      right: 0;
+      width: 20px;
+      height: 20px;
+      border-bottom-right-radius: 20px;
+      box-shadow: 5px 5px 0px 5px var(--bg);
+      background-color: transparent;
+}
+
+.ds-menu ul li.active::after{
+      content: '';
+      position: absolute;
+      bottom: -20px;
+      right: 0;
+      width: 20px;
+      height: 20px;
+      border-top-right-radius: 20px;
+      box-shadow: 5px -2px 0px 2px var(--bg);
+      background-color: transparent;
+      
+}
   
 .ds-menu ul li a{
       cursor: pointer;
@@ -222,7 +243,6 @@ a{
 }
   
 .ds-perfil .info-perfil{
-	padding-top: 10px;
       transition: 0.5s;
       display: none;
 }
@@ -259,7 +279,6 @@ a{
       background: transparent;
       display: flex;
       white-space: nowrap;
-      text-decoration: none;
       color: var(--white);
       margin-top: 100px;
   }
@@ -307,7 +326,7 @@ a{
 .line.short{
       background-color: #606064;
       position: relative;
-      width: 100%;
+      width: 93%;
       top: -25px;
       height: 1px;
 }
@@ -328,9 +347,9 @@ a{
       bottom: 100px;
 }
   
-/*===================================
-    ESTILOS PANEL RIGHT
-===================================*/
+  /*===================================
+      ESTILOS PANEL RIGHT
+  ===================================*/
 .ds-panel{
     width: calc(100%);
     padding: 20px 30px 20px 40px;
@@ -341,7 +360,7 @@ a{
     width: 100%;
     background: var(--container);
     padding: 8px;
-    border-radius: 20px;
+    border-radius: 30px;
     display: flex;
     align-items: center;
     margin-bottom: 20px;
@@ -349,7 +368,7 @@ a{
 
 .ds-panel .panel-header .icono{
     width: 50px;
-    inset: 10;
+    inset: 1;
     border-radius: 10px;
     text-align: center;
     padding: 6px 0px 0px 0px;
@@ -360,63 +379,160 @@ a{
 }
 
 .ds-panel .panel-header h2{
-	padding-top: 10px;
-	font-size: 1.7em;
+    font-size: 1.7em;
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     color: var(--white);
 }
-  
-.panel-insights{
+
+.ds-panel-content{
+      background: var(--container);
+      padding: 20px;
+      border-radius: 20px;
+      margin: 0px auto;
+      width: 900px;
+}
+
+.logbook-form{
+      display: grid;
+      margin-top: 2rem;
+      grid-template-columns: repeat(2, 1fr);
+      column-gap: 2rem;
+      row-gap: 1rem;
+}
+
+.input-wrap{
+      position: relative;
+}
+
+.input-wrap.w-100{
+      grid-column: span 2;
+}
+
+.logbook-input{
       width: 100%;
-      float: left;
-      display: flex;
-      gap: 1.5rem;
-      justify-content: center;
-}
-
-.box{
-      width: 320px;
-      height: 120px;
-      background-color: var(--container);
-      margin-left: 10px;
-      padding: 10px;
-      border-radius: 2rem;
-      cursor: pointer;
-}
-
-.box p{
+      background-color: #1f2225;
+      padding: 1.5rem 1.35rem calc(0.75rem - 2px) 1.35rem;
+      border: none;
+      outline: none;
+      font-family: inherit;
+      border-radius: 20px;
       color: var(--white);
-      font-weight: bold;
-      line-height: 30px;
-      padding-left: 19px;
-      margin-top: 5px;
-      display: inline-block;
+      font-weight: 600;
+      font-size: 0.95rem;
+      border: 2px solid transparent;
+      box-shadow: 0 0 0 0px hsla(var(--green), 92%, 54%, 0.169);
+      transition: 0.3s;
 }
 
-.box p [style="color: white;"]{
-	 font-size: 37px;
-	 padding-top: 10px;
-	 padding-bottom: 10px;
-}
-.box p span{
-      font-size: 27px;
-      font-weight: 800;
-      text-transform: uppercase;
-      color:var(--green);
-      display: block;
-      margin-top: 2px;
+.logbook-input:hover{
+      background-color: #1b1e22;
 }
 
-.box ion-icon{
-      font-size: 70px !important;
-      float: right;
-      margin-top: 17px !important;
+.input-wrap label{
+      position: absolute;
+      top: 25%;
+      left: calc(1.35rem + 2px);
+      transform: translateY(-50%);
+      color: #6db23e;
+      pointer-events: none;
+      font-weight: 600;
+}
+
+.input-wrap label.text{
+      position: absolute;
+      top: 23% !important;
+}
+
+.input-wrap .icon{
+      position: absolute;
+      right: calc(1.35rem + 2px);
+      top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none;
       color: var(--green);
-      padding-right: 20px;
+      font-size: 1.5rem;
+      font-weight: 900;
 }
 
+textarea.logbook-input{
+      resize: none;
+      width: 100%;
+      min-height: 150px;
+}
+
+textarea.logbook-input ~ label{
+      top: 1.2rem;
+}
+
+textarea.logbook-input ~ .icon{
+      top: 1.3rem;
+      transform: none;
+}
+
+.input-wrap.focus .logbook-input{
+      border: 2px solid var(--green);
+}
+
+.input-wrap.textarea.not-empty label{
+      font-size: .7rem;
+      top: 10.75rem;
+      transform: translateY(-24px);
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+      display: none;
+}
+
+input[type="time"]::-webkit-calendar-picker-indicator {
+      display: none;
+}
+
+
+select {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      background: transparent;
+      background-repeat: no-repeat;
+      background-position: right center;
+}
+
+input[type="time"]::selection{
+      background-color: transparent;
+}
+
+.logbook-buttons{
+      display: grid;
+      grid-template-columns: 1fr;
+      margin-top: 1rem !important;
+      margin-bottom: 2rem !important;
+      margin: 0 auto;
+      width: 60%;
+      grid-column: span 2;
+
+}
+
+.btn-registrar{
+      display: inline-block;
+      padding: 1.1rem 2rem;
+      background-image: linear-gradient(to right, #6db23e, #7bbd4e, #6db23e);
+      border: none;
+      border-radius: 40px;
+      color: var(--white);
+      font-size: 1.2rem;
+      font-weight: 700;
+      background-size: 200%;
+      text-transform: uppercase;
+      transition: 0.5s;
+}
+
+.btn-registrar:hover{
+      background-position: right;
+}
+
+/*****/
 /****************************/
 
 .table-container h2{
@@ -463,12 +579,12 @@ table tbody tr .primary a:hover{
     color: #fff; 
 }
 
-	  </style>
-</head>
+	
+</style>
 <body>
-      <div class="admin-dashboard">
+  <div class="admin-dashboard">
 
-             <div class="ds-left-menu">
+            <div class="ds-left-menu">
     
                 <button class="btn-menu">
                     <ion-icon name="chevron-back-circle"></ion-icon>
@@ -479,7 +595,7 @@ table tbody tr .primary a:hover{
                         <ion-icon name="person-circle"></ion-icon>
                     </div>
                     <div class="info-perfil">
-                        <h3>[[${user.getFullname()}]]</h3>
+                        <h3></h3>
                     </div>
                 </div>
     
@@ -553,48 +669,37 @@ table tbody tr .primary a:hover{
                     <div class="icono">
                         <ion-icon name="folder-open-outline"></ion-icon>
                     </div>
-                    <h2>Lista de Incidentes Evaluados</h2>
+                    <h2>Incidentes Registrados en la Bitacora de Incidentes</h2>
                 </div>
-                
+            
+<div class="table-container">
+<table>
+    <thead>
+        <tr>
+            <th>Fecha</th>
+            <th>Hora</th>
+            <th>Descripción</th>
+            <th>Tipo de Incidencia</th>
+            <th>Incidencia</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="bitacora : ${bitacoraList}">
+            <td th:text="${#dates.format(bitacora.fecha, 'dd/MM/yyyy')}"></td>
+            <td th:text="${bitacora.hora}"></td>
+            <td th:text="${bitacora.descripcion}"></td>
+            <td th:text="${bitacora.tipoIncidencia.nombre}"></td>
+            <td th:text="${bitacora.incidencia != null ? bitacora.incidencia.nombre : 'N/A'}"></td>
+      
+			<td>
+				<button>Ver Detalle</button>
+			</td>
+        </tr>
+    </tbody>
+</table>
 
-               <div class="table-container">
-
-                    <!-- En tu archivo lista-incidencias-evaluadas.html -->
-					<table>
-					    <thead>
-					        <tr>
-					            <th>Fecha</th>
-					            <th>Hora</th>
-					            <th>Tipo</th>
-					            <th>Accion</th>
-					        </tr>
-					    </thead>
-					    <tbody>
-					       
-					        <tr th:each="incidencia : ${incidenciasReportadas}">					     
-					            <td th:text="${#temporals.format(incidencia.fecha, 'dd/MM/yyyy')}"></td>					          
-					            <td th:text="${#temporals.format(incidencia.hora, 'hh:mm a')}"></td>
-					            <td th:text="${incidencia.tipoIncidencia}"></td>					         
-					            <td class="primary">
-									<button type="button" class="btn btn-primary btn-ver-detallesIncidencia"
-        th:attr="data-incidencia='{&quot;fecha&quot;: &quot;'+${#temporals.format(incidencia.fecha, 'yyyy-MM-dd')}+'&quot;,
-                                           &quot;hora&quot;: &quot;'+${#temporals.format(incidencia.hora, 'HH:mm:ss')}+'&quot;,
-                                           &quot;nombre&quot;: &quot;'+${incidencia.nombre}+'&quot;,
-                                           &quot;descripcion&quot;: &quot;'+${incidencia.descripcion}+'&quot;
-                                           }'">
-    Ver Detalles
-</button>
-                    			</td>
-					        </tr>
-					    </tbody>
-					</table>
-
-            </div>
-    
-        </div>
-        
-        
-         <div class="modal fade" id="detalleIncidenciaEvaluada" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="detalleBitacora" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header custom-modal-header">
@@ -612,21 +717,22 @@ table tbody tr .primary a:hover{
 							<label for="hora">Hora</label>
 							<input type="datetime"class="form-control" id="hora" readonly disabled="true">
 						</div>
-						
-						<div class="mb-3">
-							<label for="nombre">Nombre</label>
-							<input type="text"class="form-control" id="nombre" readonly disabled="true">
-						</div>
-						
 						<div class="mb-3">
 							<label for="descripcion">Descripcion:</label>
 							<textarea class="form-control" id="descripcion" readonly disabled="true"></textarea>
 						</div>
 						
 						<div class="mb-3">
-							<label for="descripcion">Tipo:</label>
-							<textarea class="form-control" id="tipoIncidencia" readonly disabled="true"></textarea>
+							<label for="nombre">Tipo Incidencia</label>
+							<input type="text"class="form-control" id="tipoIncidencia" readonly disabled="true">
 						</div>
+						
+						<div class="mb-3">
+							<label for="nombre">Nombre</label>
+							<input type="text"class="form-control" id="nombre" readonly disabled="true">
+						</div>
+						
+						
 						
 						
 					</div>
@@ -637,12 +743,14 @@ table tbody tr .primary a:hover{
 				</div>
 			</div>	  
 	  </div>
-    
+      
+
+
 </body>
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 <script>
-    let btnmenu = document.querySelector('.btn-menu');
+	let btnmenu = document.querySelector('.btn-menu');
     let dsleftmenu = document.querySelector('.ds-left-menu');
     let line = document.querySelector('.line');
     let linetwo = document.querySelector('.line-two');
@@ -665,19 +773,18 @@ table tbody tr .primary a:hover{
     menulist.forEach((item)=>
     item.addEventListener('click', activeLink));
     
-   /**		MODAL	**/
-    $(document).on("click", ".btn-ver-detallesIncidencia", function() {
-    const incidencia = $(this).data("incidencia");
+    /**		MODAL	**/
+    $(document).on("click", ".btn-ver-detalleBitacora", function() {
+    const bitacora = $(this).data("bitacora");
     
-    $("#fecha").val(incidencia.fecha);
-    $("#hora").val(incidencia.hora);
-    $("#nombre").val(incidencia.nombre);
-    $("#descripcion").val(incidencia.descripcion);
+    $("#fecha").val(bitacora.fecha);
+    $("#hora").val(bitacora.hora);
+    $("#descripcion").val(bitacora.descripcion);
+    $("#tipoIncidencia").val(bitacora.tipoIncidencia.nombre); 
+   	$("#nombre").val(bitacora.incidencia.nombre);
    
-   
-   $("#detalleIncidenciaEvaluada").modal("show");
+   $("#detalleBitacora").modal("show");
    
 });
-
 </script>
 </html>

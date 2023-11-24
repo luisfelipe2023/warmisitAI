@@ -12,8 +12,8 @@ public class TipoIncidenciaReportada {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_tipo_incidencia")
-    private int idTipoIncidencia;
-    private String nombre;
+    public int idTipoIncidencia;
+    public String nombre;
 	
 	
 	public int getIdTipoIncidencia() {

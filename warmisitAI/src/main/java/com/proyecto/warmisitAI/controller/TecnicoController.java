@@ -29,13 +29,11 @@ public class TecnicoController {
 	    public String mostrarListadoTecnicos(Model model, Principal principal) {
 	        List<Tecnico> tecnicos = tecnicoService.obtenerTodosLosTecnicos();
 	        long cantidadTecnicos = tecnicoService.cantidadTotalTecnicos();
-	        int tecnicosDisponibles = tecnicoService.obtenerTecnicosDisponibles();
-	        int tecnicosOcupados = tecnicoService.obtenerTecnicosOcupado();
+	       
 	        	            
 	        model.addAttribute("tecnicos", tecnicos);
 	       
-	        model.addAttribute("tecnicosDisponibles",tecnicosDisponibles);
-	        model.addAttribute("tecnicosOcupados", tecnicosOcupados);
+	        
 	        model.addAttribute("cantidadTecnicos",cantidadTecnicos);
 	        
 	        UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
@@ -48,13 +46,8 @@ public class TecnicoController {
 	   public String mostrarListaDeTecnicos(Model model, Principal principal) {
 	        List<Tecnico> tecnicos = tecnicoService.obtenerTodosLosTecnicos();
 	        long cantidadTecnicos = tecnicoService.cantidadTotalTecnicos();
-	        int tecnicosDisponibles = tecnicoService.obtenerTecnicosDisponibles();
-	        int tecnicosOcupados = tecnicoService.obtenerTecnicosOcupado();
-	        	            
+	        	        	            
 	        model.addAttribute("tecnicos", tecnicos);
-	       
-	        model.addAttribute("tecnicosDisponibles",tecnicosDisponibles);
-	        model.addAttribute("tecnicosOcupados", tecnicosOcupados);
 	        model.addAttribute("cantidadTecnicos",cantidadTecnicos);
 	        
 	        UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());

@@ -349,16 +349,15 @@ a{
 .panel-insights{
       width: 100%;
       float: left;
-      display: flex;
-      gap: 1.5rem;
-      justify-content: center;
+      
+
 }
 
 .box{
       width: 320px;
       height: 120px;
       background-color: var(--container);
-      margin-left: 10px;
+     
       padding: 10px;
       border-radius: 2rem;
       cursor: pointer;

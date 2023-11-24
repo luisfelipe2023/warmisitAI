@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
-import com.proyecto.warmisitAI.models.Estado;
+
 import com.proyecto.warmisitAI.models.Tecnico;
 import com.proyecto.warmisitAI.repository.TecnicoRepository;
 
@@ -36,13 +36,9 @@ public class TecnicoService {
 	    	return  tecnicoRepository.countBy();
 	    }
 	    
-	    public int obtenerTecnicosDisponibles() {
-	    	return tecnicoRepository.countByEstado(Estado.DISPONIBLE);
-	    }
 	    
-	    public int obtenerTecnicosOcupado() {
-	    	return tecnicoRepository.countByEstado(Estado.OCUPADO);
-	    }
+	    
+	   
 	    
 	   
 	    

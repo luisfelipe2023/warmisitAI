@@ -4,11 +4,11 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class IncidenciaDTO {
-	private LocalDate fecha;
-    private LocalTime hora;
-    private String nombre;
-    private String descripcion;
-    private String tipoIncidencia;
+	public LocalDate fecha;
+    public LocalTime hora;
+    public String nombre;
+    public String descripcion;
+    public String tipoIncidencia;
     
     public IncidenciaDTO(LocalDate fecha, LocalTime hora, String nombre, String descripcion, String tipoIncidencia) {
         this.fecha = fecha;
